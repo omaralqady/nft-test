@@ -14,7 +14,7 @@ contract AdvancedCollectible is ERC721URIStorage, VRFConsumerBase {
         SHIBA_INU,
         ST_BERNARD
     }
-    mapping(uint256 => Breed) tokenIdToBreed;
+    mapping(uint256 => Breed) public tokenIdToBreed;
     mapping(bytes32 => address) public requestIdToSender;
     event requestedCollectible(bytes32 indexed requestId, address requester);
     event breedAssigned(uint256 indexed tokenId, Breed breed);
