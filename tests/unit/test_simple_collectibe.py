@@ -1,5 +1,5 @@
 from scripts.utils import LOCAL_BLOCKCHAINS, get_account
-from scripts.deploy import deploy
+from scripts.simple_collectible.deploy import deploy
 from brownie import network
 import pytest
 
