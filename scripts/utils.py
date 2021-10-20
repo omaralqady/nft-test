@@ -1,4 +1,5 @@
-from brownie import accounts, network, config, LinkToken, VRFCoordinatorMock
+from brownie import accounts, network, config, LinkToken, VRFCoordinatorMock, Contract
+from web3 import Web3
 
 LOCAL_BLOCKCHAINS = ["development", "ganache-local"]
 OPENSEA_URL = "https://testnets.opensea.io/assets/{}/{}"
@@ -34,6 +35,17 @@ def get_contract(contract_name):
         )
 
     return contract
+
+
+def fund_with_link(
+    contract_address, account=None, link_token=None, amount=Web3.toWei(1, "ether")
+):
+    account = account if account else get_account()
+    link_token = link_token if link_token else get_contract("link_token")
+    tx = link_token.transfer(contract_address, amount, {"from": account})
+    tx.wait(1)
+    print("Funded contract!")
+    return tx
 
 
 def deploy_mocks():

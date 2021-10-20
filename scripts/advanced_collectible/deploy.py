@@ -1,4 +1,10 @@
-from scripts.utils import OPENSEA_URL, get_account, get_network_config, get_contract
+from scripts.utils import (
+    OPENSEA_URL,
+    get_account,
+    get_network_config,
+    get_contract,
+    fund_with_link,
+)
 from brownie import AdvancedCollectible
 
 
@@ -11,7 +17,11 @@ def deploy():
         get_network_config("fee"),
         {"from": account},
     )
-    return advanced_collectible
+    fund_with_link(advanced_collectible.address)
+    tx = advanced_collectible.createCollectible({"from": account})
+    tx.wait(1)
+    print("Token has been created")
+    return advanced_collectible, tx
 
 
 def main():
