@@ -6,6 +6,12 @@ OPENSEA_URL = "https://testnets.opensea.io/assets/{}/{}"
 
 contract_to_mock = {"link_token": LinkToken, "vrf_coordinator": VRFCoordinatorMock}
 
+breed_list = {0: "PUG", 1: "SHIBA_INU", 2: "ST_BERNARD"}
+
+
+def get_breed(breed_number):
+    return breed_list[breed_number]
+
 
 def get_network_config(property):
     return config["networks"][network.show_active()][property]
